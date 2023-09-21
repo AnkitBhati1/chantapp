@@ -130,11 +130,3 @@ class StartChatView(APIView):
         user_ids.sort()
         room_name = f"{user_ids[0]}_{user_ids[1]}"
         return Response({"message": "Chat started successfully", "room_name": room_name}, status=status.HTTP_200_OK)
-
-
-# Ping View
-
-class PingView(APIView):
-    permission_classes = (IsAuthenticated,)
-    def get(self, request):
-        return Response({"message": "Pong"}, status=status.HTTP_200_OK)

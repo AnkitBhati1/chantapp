@@ -12,6 +12,5 @@ urlpatterns = [
     path('chat/start/', StartChatView.as_view(), name='start_chat'),
     path("", index, name="index"),
     path("<str:room_name>/", room, name="room"),
-    path('ping/', PingView.as_view()),
 
 ]
