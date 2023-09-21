@@ -1,0 +1,23 @@
+<form>
+    username: <input type="text" name="username"  /><br />
+    email: <input type="email" name="email" /><br />
+    password: <input type="password" name="password" /><br />
+    <input type="submit" name="submit" value="Submit" />
+</form>
+
+
+<script>
+    var form = document.querySelector('form');
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var data = new FormData(form);
+        var request = await fetch('/api/register/', {
+            method: 'POST',
+            body: data
+        });
+
+        var response = await request.json();
+        localStorage.setItem('token', response.token);
+        window.location.href = '/api/loginpage/';
+    });
+</script>

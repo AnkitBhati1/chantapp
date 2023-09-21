@@ -1,0 +1,39 @@
+{% for x in online_users %} 
+    <li>{{ x }}</li>
+    <button onclick = "start_chat('{{ x }}')">Start Chat</button>
+{% endfor %}
+
+
+logout <button onclick = "logout()">Logout</button>
+
+<script>
+    async function start_chat(username){
+        const api_url = "/api/chat/start/" 
+        const data = {
+            "username": username
+        }
+        const token = localStorage.getItem("token")
+        const res = await fetch(api_url, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Authorization": "Token " + token,
+                "Content-Type": "application/json"
+            }
+        })
+
+        const json = await res.json()
+
+        if (json.message == "error"){
+            alert("Error")
+        } else {
+            window.location.href = "/api/" + json.room_name
+        }
+    }
+
+    function logout(){
+        localStorage.removeItem("token")
+        window.location.href = "/api/loginpage/"
+    }
+
+    </script>
