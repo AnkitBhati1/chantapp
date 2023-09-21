@@ -11,13 +11,13 @@
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         var data = new FormData(form);
-        var request = await fetch('/api/register/', {
+        var request = await fetch('/api/registerapi/', {
             method: 'POST',
             body: data
         });
 
         var response = await request.json();
         localStorage.setItem('token', response.token);
-        window.location.href = '/api/loginpage/';
+        window.location.href = '/api/login/';
     });
 </script>

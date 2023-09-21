@@ -3,7 +3,7 @@
     password: <input type="password" name="password" /><br />
     <input type="submit" name="submit" value="Submit" />
 
-    Not a member? <a href="/api/registerpage/">Register</a>
+    Not a member? <a href="/api/register/">Register</a>
 </form>
 
 
@@ -12,7 +12,7 @@
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         var data = new FormData(form);
-        var request = await fetch('/api/login/', {
+        var request = await fetch('/api/loginapi/', {
             method: 'POST',
             body: data
         });
