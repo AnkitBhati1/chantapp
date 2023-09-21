@@ -31,9 +31,28 @@ logout <button onclick = "logout()">Logout</button>
         }
     }
 
-    function logout(){
-        localStorage.removeItem("token")
-        window.location.href = "/api/login/"
+    async function logout(){
+        //localStorage.removeItem("token")
+        //window.location.href = "/api/login/"
+        const api_url = "/api/logoutapi/"
+        const token = localStorage.getItem("token")
+        console.log(token)
+        const res = await fetch(api_url, {
+            method: "POST",
+            headers: {
+                "Authorization": "Token " + token,
+                "Content-Type": "application/json"
+            }
+        })
+
+        const json = await res.json()
+
+        if (json.message == "error"){
+            alert("Error")
+        } else {
+            localStorage.removeItem("token")
+            window.location.href = "/api/login/"
+        }
     }
 
     </script>
