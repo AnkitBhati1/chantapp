@@ -36,7 +36,7 @@ logout <button onclick = "logout()">Logout</button>
         //window.location.href = "/api/login/"
         const api_url = "/api/logoutapi/"
         const token = localStorage.getItem("token")
-        console.log(token)
+
         const res = await fetch(api_url, {
             method: "POST",
             headers: {
