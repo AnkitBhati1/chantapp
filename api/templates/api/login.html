@@ -16,7 +16,7 @@
             method: 'POST',
             body: data
         });
-        if (request.status === 400) {
+        if (request.status !== 200) {
             alert('Invalid username or password');
             return;
         }
