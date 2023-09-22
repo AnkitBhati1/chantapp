@@ -111,7 +111,7 @@ class OnlineUsersView(APIView):
 # Start Chat View
 
 class StartChatView(APIView):
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     serializer_class = StartChatSerializer
     def post(self, request):
         # Implement token or session-based authentication here
