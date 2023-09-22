@@ -36,12 +36,14 @@
                 document.querySelector('#chat-message-submit').click();
             }
         };
-
+        const user = localStorage.getItem('user')
         document.querySelector('#chat-message-submit').onclick = function(e) {
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
             chatSocket.send(JSON.stringify({
-                'message': message
+                'message': message,
+                'room_name': roomName,
+                'user': user
             }));
             messageInputDom.value = '';
         };

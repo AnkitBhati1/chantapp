@@ -11,6 +11,7 @@ from rest_framework.authtoken.models import Token
 from datetime import datetime , timedelta
 from django.db.models import Q
 from django.contrib.auth.models import User
+from .models import chatRoom
 
 # Create your views here.
 with open('users.json') as f:
@@ -129,4 +130,13 @@ class StartChatView(APIView):
         user_ids = [user.id, request.user.id]
         user_ids.sort()
         room_name = f"{user_ids[0]}_{user_ids[1]}"
+        try:
+            chatRoom.objects.get(name=room_name)
+        except chatRoom.DoesNotExist:
+            chatroom = chatRoom()
+            chatroom.name = room_name
+            chatroom.slug = room_name
+            chatroom.save()
+            chatroom.user.add(user, request.user)
+            chatroom.save()
         return Response({"message": "Chat started successfully", "room_name": room_name}, status=status.HTTP_200_OK)
